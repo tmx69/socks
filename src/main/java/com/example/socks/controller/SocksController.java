@@ -20,12 +20,9 @@ import javax.validation.constraints.NotNull;
 @RequestMapping("api")
 @RequiredArgsConstructor
 @Validated
-//@RequiredArgsConstructor
 public class SocksController {
 
-
     private final SocksService socksService;
-
 
     @PostMapping(path = "/socks/income", produces = "application/json")
     public ResponseEntity<?> income(@Valid @RequestBody SocksDTO socks, BindingResult result) {
