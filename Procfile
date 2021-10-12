@@ -1,1 +1,0 @@
-web: java -jar target/socks-0.0.1-SNAPSHOT.war

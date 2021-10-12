@@ -1,14 +1,14 @@
 package com.example.socks.service;
 
+import com.example.socks.controller.SocksController;
 import com.example.socks.db.dto.SocksDTO;
 import com.example.socks.db.entity.Socks;
 import com.example.socks.db.repository.SocksRepository;
 import lombok.RequiredArgsConstructor;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.example.socks.Util.Operations;
 import java.util.List;
 
 @Service
@@ -43,22 +43,22 @@ public class SocksService {
         return socksRepository.findAll();
     }
 
-    public int getSocksByOperation(String color, String operation, int cottonPart) {
+    public int getSocksByOperation(String color, Operations operation, int cottonPart) {
 
         switch (operation) {
-            case "moreThan":
+            case MORETHAN:
                 return socksRepository
                         .findByCottonPartGreaterThanAndColorEquals(cottonPart, color)
                         .stream()
                         .mapToInt(Socks::getQuantity)
                         .sum();
-            case "lessThan":
+            case LESSTHAN:
                return socksRepository
                        .findByCottonPartIsLessThanAndColorEquals(cottonPart, color)
                        .stream()
                        .mapToInt(Socks::getQuantity)
                        .sum();
-            case "equal":
+            case EQUAL:
                 return socksRepository
                         .findByCottonPartEqualsAndColorEquals(cottonPart, color)
                         .stream()

@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class SocksDTO {
 
-    @NotNull
     @NotBlank(message = "Color is mandatory")
     private String color;
 

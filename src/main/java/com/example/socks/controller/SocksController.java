@@ -1,5 +1,6 @@
 package com.example.socks.controller;
 
+import com.example.socks.Util.Operations;
 import com.example.socks.db.dto.SocksDTO;
 import com.example.socks.service.SocksService;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +28,6 @@ public class SocksController {
     @PostMapping(path = "/socks/income", produces = "application/json")
     public ResponseEntity<?> income(@Valid @RequestBody SocksDTO socks, BindingResult result) {
 
-//        if (result.hasErrors()) {
-//            return new ResponseEntity<>("Параметры запроса отсутствуют или имеют некорректный формат", HttpStatus.BAD_REQUEST);
-//        }
         try {
             socksService.saveSocks(socks);
         } catch (Exception e) {
@@ -41,10 +39,6 @@ public class SocksController {
 
     @PostMapping(path = "/socks/outcome", produces = "application/json")
     public ResponseEntity<?> outcome(@Valid @RequestBody SocksDTO socksDTO, BindingResult result) {
-//        if (bindingResult.hasErrors()) {
-//            return new ResponseEntity<>("Параметры запроса отсутствуют или имеют некорректный формат", HttpStatus.BAD_REQUEST);
-//        }
-
         try {
             var socks = socksService.getSocks(socksDTO);
             if (socks == null || socks.getQuantity() < socksDTO.getQuantity())
@@ -59,11 +53,11 @@ public class SocksController {
 
     @GetMapping(path = "/socks", produces = "application/json")
     public ResponseEntity<String> getSocks(@RequestParam(value = "color") @NotNull @NotBlank String color ,
-                                      @RequestParam(value = "operation") @NotNull @NotBlank String operation,
+                                      @RequestParam(value = "operation") Operations operation,
                                       @RequestParam(value = "cottonPart") @Min(0) @Max(100) int cottonPart) {
         try {
             var socks = socksService.getSocksByOperation(color, operation, cottonPart);
-                return new ResponseEntity<>(String.valueOf(socks), HttpStatus.OK);
+            return new ResponseEntity<>(String.valueOf(socks), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Произошла ошибка, не зависящая от вызывающей стороны (например, база данных недоступна)", HttpStatus.INTERNAL_SERVER_ERROR);
         }
