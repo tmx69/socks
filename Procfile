@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.example.socks
+web: java -jar target/socks-0.0.1-SNAPSHOT.war
