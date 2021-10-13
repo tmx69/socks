@@ -63,8 +63,4 @@ public class SocksController {
         }
     }
 
-    @GetMapping(path = "/allSocks", produces = "application/json")
-    public ResponseEntity<?> getAllSocks() {
-        return new ResponseEntity<>(socksService.getAllSocks(), HttpStatus.OK);
-    }
 }

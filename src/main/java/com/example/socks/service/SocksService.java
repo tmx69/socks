@@ -38,10 +38,6 @@ public class SocksService {
         return socksRepository.findByCottonPartAndColor(socksDTO.getCottonPart(), socksDTO.getColor());
     }
 
-    public List<Socks> getAllSocks() {
-        return socksRepository.findAll();
-    }
-
     public int getSocksByOperation(String color, Operations operation, int cottonPart) {
 
         switch (operation) {
