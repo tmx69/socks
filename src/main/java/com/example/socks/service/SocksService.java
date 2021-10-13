@@ -1,6 +1,5 @@
 package com.example.socks.service;
 
-import com.example.socks.controller.SocksController;
 import com.example.socks.db.dto.SocksDTO;
 import com.example.socks.db.entity.Socks;
 import com.example.socks.db.repository.SocksRepository;

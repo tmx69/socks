@@ -56,8 +56,8 @@ public class SocksController {
                                       @RequestParam(value = "operation") Operations operation,
                                       @RequestParam(value = "cottonPart") @Min(0) @Max(100) int cottonPart) {
         try {
-            var socks = socksService.getSocksByOperation(color, operation, cottonPart);
-            return new ResponseEntity<>(String.valueOf(socks), HttpStatus.OK);
+            var socksCount = socksService.getSocksByOperation(color, operation, cottonPart);
+            return new ResponseEntity<>(String.valueOf(socksCount), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Произошла ошибка, не зависящая от вызывающей стороны (например, база данных недоступна)", HttpStatus.INTERNAL_SERVER_ERROR);
         }
